@@ -23,6 +23,20 @@ class RouteModel : public Model {
             return std::sqrt(std::pow((x - other.x), 2) + std::pow((y - other.y), 2));
         }
 
+        float ComputeFValue() {
+            return this->g_value + this->h_value;
+        }
+
+        void PrintNode() {
+            std::cout << "Node " << ": [" << this->x << "," << this->y << "] ";
+            std::cout << "(g = " << this->g_value << ", h = " << this->h_value << 
+                "f = " << this->ComputeFValue() << ") ";
+            if (!this->visited) {
+                std::cout << "not ";
+            }
+            std::cout << "visited\n";
+        }
+
         Node(){}
         Node(int idx, RouteModel * search_model, Model::Node node) : Model::Node(node), parent_model(search_model), index(idx) {}
 
